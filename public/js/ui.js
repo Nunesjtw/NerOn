@@ -89,6 +89,9 @@ function ui() {
   if (typeof renderQuality === 'function') renderQuality();
   $('#txt').disabled = !cur;
   $('#send').disabled = !cur;
+  $('#attach').disabled = !cur;
+  $('#emojiBtn').disabled = !cur;
+  if (!cur && typeof resetComposer === 'function') resetComposer();   // saiu da call: fecha popup e descarta anexo
   $('#msgs').dataset.empty = cur ? 'Nenhuma mensagem ainda. Diga oi.' : 'Entre em um canal para ver e enviar mensagens.';
   renderTabs();
   $('#txt').placeholder = cur ? 'Enviar mensagem' : 'Entre em um canal para conversar';

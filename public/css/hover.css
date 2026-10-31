@@ -11,4 +11,8 @@
     .cb.leave:hover { background: #dc3f56; }
     .send:not(:disabled):hover { background: #e4e4e7; }
     .m:hover { background: rgba(255, 255, 255, .035); }
+    .tool:not(:disabled):hover { background: var(--glass-hover); color: var(--white); }
+    #attach-remove:hover { background: var(--s3); color: var(--white); }
+    .emoji-grid button:hover { background: var(--glass-hover); transform: scale(1.12); }
+    .m .mimg:hover { transform: scale(1.015); box-shadow: 0 0 0 1px rgba(255, 255, 255, .28); }
   }

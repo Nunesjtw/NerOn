@@ -80,7 +80,21 @@
   <div class="top"><strong>Chat</strong><span id="chsub">Entre em um canal para conversar</span></div>
   <div id="msgs"></div>
   <div id="typing" aria-live="polite"></div>
-  <div id="composer"><input id="txt" placeholder="Entre em um canal para conversar" maxlength="1000" autocomplete="off" aria-label="Mensagem" disabled><button class="send" id="send" aria-label="Enviar mensagem" disabled></button></div>
+  <div id="attach-preview" hidden>
+    <img id="attach-thumb" alt="Prévia da imagem anexada">
+    <span id="attach-name"></span>
+    <button type="button" id="attach-remove" class="icon-btn" aria-label="Remover imagem"></button>
+  </div>
+  <div id="composer-wrap">
+    <div id="emoji-pop" role="dialog" aria-label="Seletor de emojis" hidden></div>
+    <div id="composer">
+      <input type="file" id="file" accept="image/*" hidden>
+      <button type="button" class="tool" id="attach" title="Anexar imagem" aria-label="Anexar imagem" disabled></button>
+      <input id="txt" placeholder="Entre em um canal para conversar" maxlength="1000" autocomplete="off" aria-label="Mensagem" disabled>
+      <button type="button" class="tool" id="emojiBtn" title="Emojis" aria-label="Abrir seletor de emojis" aria-haspopup="dialog" aria-expanded="false" disabled></button>
+      <button class="send" id="send" aria-label="Enviar mensagem" disabled></button>
+    </div>
+  </div>
 </section>
 
 <nav class="tabs" aria-label="Seções"><button data-p="canais" id="tb-canais"></button><button data-p="call" id="tb-call"></button><button data-p="chat" id="tb-chat"></button></nav>

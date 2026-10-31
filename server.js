@@ -5,7 +5,13 @@ const { randomUUID } = require('crypto');
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+// maxHttpBufferSize: imagens viajam em Base64 pelo WebSocket, então o limite padrão (1 MB) é pequeno demais
+const io = new Server(server, { maxHttpBufferSize: 4e6 });
+
+// imagens do chat: só formatos seguros (sem SVG) e com teto de tamanho
+const IMG_RE = /^data:image\/(png|jpeg|gif|webp);base64,[A-Za-z0-9+/]+={0,2}$/;
+const IMG_MAX = 2_500_000;        // caracteres do data URL (~1,8 MB de imagem)
+const IMG_HISTORY = 20;           // quantas imagens ficam no histórico do canal (memória)
 
 // Opcional: defina ACCESS_CODE no servidor para só entrar quem tiver o código
 const ACCESS_CODE = process.env.ACCESS_CODE || '';
@@ -120,11 +126,20 @@ io.on('connection', (socket) => {
     if (socket.data.room) socket.to(socket.data.room).emit('peer:share', { id: socket.id, on });
   });
 
-  socket.on('chat', (text) => {
+  // aceita texto puro (string) ou { text, image } — image é um data URL em Base64
+  socket.on('chat', (payload) => {
     const ch = channels.get(socket.data.room);
-    const clean = String(text || '').trim().slice(0, 1000);
-    if (!ch || !clean) return;
+    if (!ch) return;
+    const p = typeof payload === 'string' ? { text: payload } : payload || {};
+    const clean = String(p.text || '').trim().slice(0, 1000);
+    const image = typeof p.image === 'string' && p.image.length <= IMG_MAX && IMG_RE.test(p.image) ? p.image : null;
+    if (!clean && !image) return;
     const msg = { name: socket.data.name, text: clean, t: Date.now() };
+    if (image) {
+      msg.image = image;
+      const withImg = ch.messages.filter((m) => m.image);
+      if (withImg.length >= IMG_HISTORY) ch.messages.splice(ch.messages.indexOf(withImg[0]), 1);
+    }
     ch.messages.push(msg);
     if (ch.messages.length > 100) ch.messages.shift();
     io.to(ch.id).emit('chat', msg);

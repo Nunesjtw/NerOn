@@ -19,6 +19,9 @@ const P = {
   msg: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
   chev: '<path d="m6 15 6-6 6 6"/>',
   list: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+  clip: '<path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/>',
+  smile: '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',
+  x: '<path d="M18 6 6 18M6 6l12 12"/>',
 };
 const svg = (n, s = 20) => '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + P[n] + '</svg>';
 function avatar(nm, size) {
@@ -34,3 +37,6 @@ $('#logo').innerHTML = svg('phone', 18);
 $('#newch').innerHTML = svg('plus', 16);
 $('#ering').innerHTML = svg('phone', 28);
 $('#send').innerHTML = svg('send', 18);
+$('#attach').innerHTML = svg('clip', 18);
+$('#emojiBtn').innerHTML = svg('smile', 18);
+$('#attach-remove').innerHTML = svg('x', 14);
