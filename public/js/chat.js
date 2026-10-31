@@ -45,9 +45,9 @@ socket.on('chat', (m) => {
   renderTyping();
   if (m.name === name) return;
   if (isMobile() && pane !== 'chat') { unread++; ui(); }
-  if (document.hidden) { away++; document.title = '(' + away + ') Chamada'; }
+  if (document.hidden) { away++; document.title = '(' + away + ') Nero'; }
 });
-document.addEventListener('visibilitychange', () => { if (!document.hidden) { away = 0; document.title = 'Chamada'; } });
+document.addEventListener('visibilitychange', () => { if (!document.hidden) { away = 0; document.title = 'Nero'; } });
 function send() {
   const i = $('#txt');
   if (cur && i.value.trim()) { socket.emit('chat', i.value); i.value = ''; stopTyping(); }

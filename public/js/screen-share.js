@@ -9,12 +9,26 @@ const QUALITY = {
 };
 let qkey = '1080-60';
 try { const k = localStorage.getItem('q'); if (QUALITY[k]) qkey = k; } catch (e) {}
-$('#q').value = qkey;
-$('#q').onchange = () => {
-  qkey = $('#q').value;
-  try { localStorage.setItem('q', qkey); } catch (e) {}
-  applyQuality();                       // vale na hora, mesmo no meio da transmissão
-};
+const QUALITY_LABEL = { '720-30': '720p · 30 fps', '720-60': '720p · 60 fps', '1080-30': '1080p · 30 fps', '1080-60': '1080p · 60 fps' };
+function renderQuality() {
+  const q = $('#q');
+  if (!q) return;
+  q.innerHTML = '<b class="dd-label">' + QUALITY_LABEL[qkey] + '</b><span class="dd-chev">' + svg('chev', 16) + '</span>';
+}
+renderQuality();
+Dropdown({
+  trigger: $('#q'),
+  placement: 'top',
+  align: 'center',
+  getValue: () => qkey,
+  options: () => Object.keys(QUALITY).map((k) => ({ value: k, label: QUALITY_LABEL[k] })),
+  onSelect: (k) => {
+    qkey = k;
+    try { localStorage.setItem('q', qkey); } catch (e) {}
+    renderQuality();
+    applyQuality();                     // vale na hora, mesmo no meio da transmissão
+  },
+});
 async function applyQuality() {
   const v = screenStream?.getVideoTracks()[0];
   if (!v) return;

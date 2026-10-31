@@ -1,17 +1,19 @@
 /* arquivo: css/base.css — Variáveis de cor/fonte, reset, corpo da página, botões, avatar base e keyframes comuns. */
 
   :root {
-    /* superfícies: cinza-asfalto, quase preto */
-    --bg: #101012; --s1: #0b0b0c; --s2: #17171a; --s3: #212125;
+    /* superfícies: cinza-asfalto (quase preto). As colunas laterais são transparentes: sem linhas, sem blocos de cor */
+    --bg: #0f0f11; --s1: #0f0f11; --s2: #17171a; --s3: #232327;
     --ring: rgba(255, 255, 255, .07);
-    /* texto */
-    --text: #f4f4f5; --dim: #a1a1aa;
+    /* vidro (glassmorphism) */
+    --glass: rgba(45, 45, 45, .7); --glass-edge: rgba(255, 255, 255, .09); --glass-hover: rgba(255, 255, 255, .1);
+    /* texto: secundário em cinza-claro para contraste sem peso */
+    --text: #f4f4f5; --dim: #b2b2ba;
     /* destaque: bronze / laranja + branco absoluto */
     --accent: #e8893a; --accent-soft: #f6b57a; --accent-ink: #1a0f05; --white: #fff;
     --danger: #ef5469; --ok: #3ddc97; --r: 14px;
     --ease-out: cubic-bezier(.23, 1, .32, 1);
     --font-ui: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-    --font-dot: Doto, "DotGothic16", ui-monospace, "SF Mono", Menlo, monospace;
+    --font-dot: Doto, "DotGothic16", ui-monospace, "SF Mono", Menlo, monospace;   /* só nos títulos principais */
   }
   * { box-sizing: border-box; margin: 0; scrollbar-width: thin; scrollbar-color: #2b2b30 transparent; }
   [hidden] { display: none !important; }

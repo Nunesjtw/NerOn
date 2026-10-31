@@ -7,4 +7,5 @@
     .tile, .m.live { animation-name: fade; }
     .icon-btn:active, .cb:active, .send:active { transform: none; }
     #bunny .iris { transition: none; }
+    .dd-menu, .dd-menu li, .me, .me-chev, .dd-chev { transition: none !important; }
   }

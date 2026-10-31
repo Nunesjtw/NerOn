@@ -4,7 +4,8 @@
     .icon-btn:hover { background: var(--s3); color: var(--white); }
     .ch:not(.on):hover { background: rgba(255, 255, 255, .04); }
     .ch:not(.on):hover .ch-row { color: var(--text); }
-    .cb:hover { background: #2c2c31; }
+    .cb:hover { background: rgba(255, 255, 255, .15); }
+    .me:not(.dd-open):hover { background: rgba(255, 255, 255, .08); }
     .cb.off:hover { background: rgba(239, 84, 105, .24); }
     .cb.live:hover { background: var(--accent-soft); }
     .cb.leave:hover { background: #dc3f56; }

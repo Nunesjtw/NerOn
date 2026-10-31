@@ -6,13 +6,12 @@
     aside, main, #chat { display: none; grid-row: 1; }
     body[data-pane="canais"] aside, body[data-pane="call"] main, body[data-pane="chat"] #chat { display: flex; }
     .top { padding-right: 76px; }
-    .me { display: none; }
     #bunny { width: 50px; height: 50px; right: 12px; }
     #stage { padding: 14px; }
     #bar { padding-bottom: 14px; }
     .cb span { display: none; }
-    #q { padding: 0 8px; font-size: 12.5px; }
-    .tabs { display: grid; grid-template-columns: repeat(3, 1fr); grid-row: 2; background: var(--s1); padding-bottom: env(safe-area-inset-bottom, 0px); }
+    #q { padding: 0 6px 0 12px; font-size: 12.5px; }
+    .tabs { display: grid; grid-template-columns: repeat(3, 1fr); grid-row: 2; background: rgba(255, 255, 255, .03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); padding-bottom: env(safe-area-inset-bottom, 0px); }
     .tabs button { position: relative; padding: 10px 0 9px; display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--dim); font-size: 12px; font-weight: 500; transition: color .15s ease; }
     .tabs button[aria-current="true"] { color: var(--white); }
     .tabs i { position: absolute; top: 7px; left: calc(50% + 8px); min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: var(--accent); color: var(--accent-ink); font: 700 10.5px/16px var(--font-ui); text-align: center; }

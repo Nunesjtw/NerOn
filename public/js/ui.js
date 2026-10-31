@@ -55,20 +55,25 @@ function ui() {
 
   const ch = channels.find((c) => c.id === cur);
   const tt = $('#title');
-  tt.textContent = ch ? ch.name : 'Chamada';
+  tt.textContent = ch ? ch.name : 'Nero';
   tt.classList.toggle('crt-glitch', !!ch);
   if (ch) tt.dataset.text = ch.name; else delete tt.dataset.text;
   $('#sub').textContent = ch ? ch.members.length + (ch.members.length === 1 ? ' pessoa na call' : ' pessoas na call') : 'Escolha um canal de voz para entrar';
   $('#chsub').textContent = ch ? '#' + ch.name : 'Entre em um canal para conversar';
 
+  /* card do usuário: um único elemento-pílula; o seletor de status é o popup aberto por ele (presence.js) */
   const me = $('#me');
-  me.className = 'me' + (cur ? ' live' : '');
+  me.className = 'me' + (cur ? ' live' : '') + (me.classList.contains('dd-open') ? ' dd-open' : '');
   me.innerHTML = '';
-  const info = document.createElement('div');
+  const info = document.createElement('div'); info.className = 'me-info';
   const b = document.createElement('b'); b.textContent = name;
-  const sm = document.createElement('small'); sm.textContent = myStatus + (ch ? ' · ' + ch.name : '');
+  const sm = document.createElement('small');
+  const sd = document.createElement('i'); sd.style.background = statusColor(myStatus);
+  const stx = document.createElement('span'); stx.textContent = myStatus + (ch ? ' · ' + ch.name : '');
+  sm.append(sd, stx);
   info.append(b, sm);
-  me.append(avatarBox(String(socket.id), name, 36, !!cur && (muted || deaf)), info);
+  const chev = document.createElement('span'); chev.className = 'me-chev'; chev.innerHTML = svg('chev', 16);
+  me.append(avatarBox(String(socket.id), name, 36, !!cur && (muted || deaf)), info, chev);
 
   $('#bar').hidden = !cur;
   const mm = muted || deaf;
@@ -81,6 +86,7 @@ function ui() {
   $('#share').innerHTML = svg('screen') + '<span>' + (screenStream ? 'Parar transmissão' : 'Compartilhar tela') + '</span>';
   $('#share').classList.toggle('live', !!screenStream);
   $('#leave').innerHTML = svg('phoneOff') + '<span>Sair</span>';
+  if (typeof renderQuality === 'function') renderQuality();
   $('#txt').disabled = !cur;
   $('#send').disabled = !cur;
   $('#msgs').dataset.empty = cur ? 'Nenhuma mensagem ainda. Diga oi.' : 'Entre em um canal para ver e enviar mensagens.';

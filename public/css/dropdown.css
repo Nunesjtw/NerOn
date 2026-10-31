@@ -1,0 +1,28 @@
+/* arquivo: css/dropdown.css — Dropdown customizado "SUI Premium": vidro fosco, padding interno e hover em pílula isolada. */
+
+  /* container: glassmorphism */
+  .dd-menu { position: fixed; z-index: 200; min-width: 200px; max-width: calc(100vw - 16px); padding: 8px; border-radius: 20px;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, .10) 0%, rgba(255, 255, 255, 0) 38%),
+      var(--glass);
+    backdrop-filter: blur(24px) saturate(140%); -webkit-backdrop-filter: blur(24px) saturate(140%);
+    box-shadow: inset 0 0 0 1px var(--glass-edge), 0 24px 60px -8px rgba(0, 0, 0, .65), 0 8px 20px rgba(0, 0, 0, .35);
+    outline: none;
+    opacity: 0; transform: translateY(6px) scale(.97); transform-origin: var(--ox, 50%) 100%; pointer-events: none;
+    transition: opacity .18s ease, transform .22s var(--ease-out); }
+  .dd-menu[data-placement="bottom"] { transform: translateY(-6px) scale(.97); transform-origin: var(--ox, 50%) 0; }
+  .dd-menu.open { opacity: 1; transform: none; pointer-events: auto; }
+  .dd-menu ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; max-height: min(60vh, 360px); overflow: auto; }
+
+  /* item: o destaque é uma pílula interna (não vai de ponta a ponta por causa do padding do container) */
+  .dd-menu li { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; cursor: pointer; user-select: none;
+    color: var(--dim); font-size: 14px; font-weight: 500; white-space: nowrap;
+    background: transparent; transition: background-color .2s ease, color .2s ease; }
+  .dd-menu li.active, .dd-menu li:hover { background: var(--glass-hover); color: var(--white); }
+  .dd-menu li[aria-selected="true"] { color: var(--white); }
+  .dd-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .dd-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .dd-check { display: grid; place-items: center; color: var(--accent-soft); flex: none; }
+  .dd-menu li.editing { cursor: default; background: var(--glass-hover); padding: 6px 8px; }
+  .dd-input { width: 100%; min-width: 180px; padding: 6px 4px; background: none; border: 0; outline: none; color: var(--white); font: inherit; }
+  .dd-input::placeholder { color: var(--dim); opacity: .8; }

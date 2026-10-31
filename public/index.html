@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chamada</title>
+<title>Nero</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="css/effects.css">
 <link rel="stylesheet" href="css/voice.css">
 <link rel="stylesheet" href="css/presence.css">
+<link rel="stylesheet" href="css/dropdown.css">
 <link rel="stylesheet" href="css/hover.css">
 <link rel="stylesheet" href="css/responsive.css">
 <link rel="stylesheet" href="css/reduced-motion.css">
@@ -50,17 +51,17 @@
   </svg>
 </div>
 <aside>
-  <div class="brand"><div class="logo" id="logo"></div><span>Chamada</span></div>
+  <div class="brand"><div class="logo" id="logo"></div><span>Nero</span></div>
   <div class="sec"><span>Canais de voz</span><button id="newch" class="icon-btn" title="Novo canal de voz" aria-label="Novo canal de voz"></button></div>
   <div id="channels"></div>
   <div class="sec"><span id="ptitle">Online</span></div>
   <div id="people"></div>
-  <div id="me" class="me"></div>
+  <button id="me" class="me" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Seu perfil e status"></button>
 </aside>
 
 <main>
   <canvas id="flow" aria-hidden="true"></canvas>
-  <div class="top"><strong id="title">Chamada</strong><span id="sub"></span></div>
+  <div class="top"><strong id="title">Nero</strong><span id="sub"></span></div>
   <div id="stage">
     <div id="empty"><div class="ring" id="ering"></div><h2 id="et"></h2><p id="ed"></p></div>
   </div>
@@ -69,12 +70,7 @@
       <button class="cb" id="mic"></button>
       <button class="cb" id="deaf"></button>
       <button class="cb" id="share"></button>
-      <select class="cb" id="q" title="Qualidade do compartilhamento de tela" aria-label="Qualidade do compartilhamento de tela">
-        <option value="720-30">720p · 30 fps</option>
-        <option value="720-60">720p · 60 fps</option>
-        <option value="1080-30">1080p · 30 fps</option>
-        <option value="1080-60">1080p · 60 fps</option>
-      </select>
+      <button class="cb dd-trigger" id="q" type="button" aria-haspopup="listbox" aria-expanded="false" title="Qualidade do compartilhamento de tela" aria-label="Qualidade do compartilhamento de tela"></button>
       <button class="cb leave" id="leave"></button>
     </div>
   </div>
@@ -97,6 +93,7 @@
 <script src="js/speaking.js"></script>
 <script src="js/sounds.js"></script>
 <script src="js/volume.js"></script>
+<script src="js/dropdown.js"></script>
 <script src="js/presence.js"></script>
 <script src="js/ping.js"></script>
 <script src="js/typing.js"></script>
