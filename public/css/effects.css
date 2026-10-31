@@ -1,0 +1,71 @@
+/* arquivo: css/effects.css — Efeito CRT + glitch dos títulos dos canais (classe .crt-glitch). */
+
+  /* ---------- efeito CRT + glitch nos títulos dos canais de voz ----------
+     Como usar: classe .crt-glitch + data-text igual ao texto (as camadas extras copiam esse texto).
+     --gd (opcional): atraso negativo em segundos, para cada título glitchar em um momento diferente. */
+  .crt-glitch {
+    --glitch-cycle: 7s;              /* de quanto em quanto tempo o sinal "cai" */
+    --glitch-ghost: #5ef0ff;         /* cor do "fantasma" deslocado */
+    position: relative; display: inline-block; white-space: nowrap;
+    font-family: var(--font-dot); font-weight: 700; letter-spacing: .03em;
+    padding: 0 3px;
+    /* brilho de fósforo + separação leve de cor, como tubo antigo */
+    text-shadow: 0 0 3px rgba(255, 255, 255, .22), -1px 0 rgba(255, 70, 90, .4), 1px 0 rgba(94, 240, 255, .35);
+    /* SCANLINES: linhas finas horizontais "cortam" o texto (2px visível, 1px apagado) */
+    -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 2px, transparent 2px 3px);
+            mask-image: repeating-linear-gradient(to bottom, #000 0 2px, transparent 2px 3px);
+    animation: crt-main var(--glitch-cycle) steps(1, end) infinite;
+    animation-delay: var(--gd, 0s);
+  }
+  .crt-glitch::before, .crt-glitch::after {
+    content: attr(data-text); position: absolute; inset: 0; padding: inherit;
+    pointer-events: none; opacity: 0;
+  }
+  /* fantasma deslocado em fatias */
+  .crt-glitch::before {
+    color: var(--glitch-ghost); text-shadow: none;
+    animation: crt-ghost var(--glitch-cycle) steps(1, end) infinite;
+    animation-delay: var(--gd, 0s);
+  }
+  /* estática: o texto reaparece preenchido de "chiado" */
+  .crt-glitch::after {
+    color: transparent; text-shadow: none;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='discrete' tableValues='0 0 1 1'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    -webkit-background-clip: text; background-clip: text; filter: brightness(2.2) contrast(1.4);
+    animation: crt-static var(--glitch-cycle) steps(1, end) infinite;
+    animation-delay: var(--gd, 0s);
+  }
+  /* o título inteiro: distorce, some, volta tremendo (quase todo o ciclo fica parado) */
+  @keyframes crt-main {
+    0%, 89.9% { transform: none; opacity: 1; filter: none; }
+    90%   { transform: translate(-2px, 0) skewX(-10deg); opacity: .85; }
+    90.8% { transform: translate(3px, 1px) skewX(8deg) scaleY(1.08); opacity: 1; filter: blur(.5px); }
+    91.6% { transform: translate(-1px, -1px) skewX(-4deg); opacity: 0; }
+    92.8% { transform: none; opacity: 0; }             /* sumiu */
+    93.4% { transform: translate(2px, 0) skewX(5deg); opacity: .35; filter: blur(.8px); }
+    94.2% { transform: translate(-3px, 0); opacity: 1; }
+    95.2% { transform: translate(1px, 1px) skewX(-3deg); opacity: .6; filter: none; }
+    96%, 100% { transform: none; opacity: 1; filter: none; }
+  }
+  @keyframes crt-ghost {
+    0%, 89.9%, 97%, 100% { opacity: 0; }
+    90%   { opacity: .9; transform: translate(-5px, 0); clip-path: inset(10% 0 62% 0); }
+    90.8% { opacity: .9; transform: translate(6px, 0);  clip-path: inset(55% 0 12% 0); }
+    91.6% { opacity: .8; transform: translate(-3px, 1px); clip-path: inset(30% 0 40% 0); }
+    93.4% { opacity: .9; transform: translate(4px, 0);  clip-path: inset(0 0 70% 0); }
+    94.2% { opacity: .8; transform: translate(-6px, 0); clip-path: inset(62% 0 0 0); }
+    95.2% { opacity: .7; transform: translate(2px, 0);  clip-path: inset(20% 0 50% 0); }
+  }
+  @keyframes crt-static {
+    0%, 92.7%, 96%, 100% { opacity: 0; }
+    92.8% { opacity: 1; background-position: 0 0; }
+    93.4% { opacity: 1; background-position: 31px 17px; }
+    94.2% { opacity: 1; background-position: -23px 41px; }
+    95.2% { opacity: .7; background-position: 12px -29px; }
+  }
+  /* passar o mouse / teclado: sinal instável na hora */
+  .ch:hover .crt-glitch, .ch:focus-visible .crt-glitch { --glitch-cycle: 1.6s; animation-delay: 0s; }
+  .ch:hover .crt-glitch::before, .ch:hover .crt-glitch::after,
+  .ch:focus-visible .crt-glitch::before, .ch:focus-visible .crt-glitch::after { animation-delay: 0s; }
+  .top strong.crt-glitch { align-self: flex-start; }
+  .ch-row .crt-glitch { font-size: 17px; line-height: 1.2; }

@@ -1,0 +1,27 @@
+/* arquivo: css/voice.css — Chamada de voz: anel de fala, ícone de mute, slider de volume e indicador de ping. */
+
+  /* ---------- avatar: anel de fala (glow) e ícone de mute ---------- */
+  .avw { position: relative; display: inline-grid; flex: none; border-radius: 50%; }
+  .avw .av { transition: box-shadow .12s ease; }
+  .avw.speaking .av { box-shadow: 0 0 0 2px var(--ok), 0 0 12px 3px rgba(61, 220, 151, .65); }
+  .avw .mi { position: absolute; right: -4px; bottom: -4px; border-radius: 50%; background: var(--danger); color: #fff; display: grid; place-items: center; box-shadow: 0 0 0 2px var(--s1); }
+  .avw .mi svg { width: 68%; height: 68%; }
+  .me .avw .mi { box-shadow: 0 0 0 2px var(--s2); }
+
+  /* ---------- slider de volume por participante ---------- */
+  .mem .u { flex-wrap: wrap; row-gap: 4px; }
+  .mem .u > span:not(.avw):not(.ping) { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .vol { -webkit-appearance: none; appearance: none; flex: 0 0 calc(100% - 30px); margin-left: 30px; height: 4px; border-radius: 4px; cursor: pointer;
+    background: linear-gradient(to right, var(--accent) var(--v, 100%), rgba(255, 255, 255, .16) var(--v, 100%)); }
+  .vol::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 0; }
+  .vol::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 0; }
+  .vol::-moz-range-track { background: transparent; }
+
+  /* ---------- indicador de ping: 3 barras + ms ---------- */
+  .ping { display: inline-flex; align-items: flex-end; gap: 2px; flex: none; color: var(--dim); font-size: 11px; line-height: 1; }
+  .ping i { width: 3px; border-radius: 1px; background: rgba(255, 255, 255, .18); transition: background-color .25s ease; }
+  .ping i:nth-child(1) { height: 4px; } .ping i:nth-child(2) { height: 7px; } .ping i:nth-child(3) { height: 10px; }
+  .ping em { font-style: normal; margin-left: 4px; font-variant-numeric: tabular-nums; align-self: center; }
+  .ping.good { color: var(--ok); }   .ping.good i { background: var(--ok); }
+  .ping.mid { color: #f5c542; }      .ping.mid i:nth-child(-n+2) { background: #f5c542; }
+  .ping.bad { color: var(--danger); } .ping.bad i:nth-child(1) { background: var(--danger); }

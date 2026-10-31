@@ -1,0 +1,13 @@
+/* arquivo: css/hover.css — Efeitos de hover (só em dispositivos com mouse). */
+
+  @media (hover: hover) and (pointer: fine) {
+    .icon-btn:hover { background: var(--s3); color: var(--white); }
+    .ch:not(.on):hover { background: rgba(255, 255, 255, .04); }
+    .ch:not(.on):hover .ch-row { color: var(--text); }
+    .cb:hover { background: #2c2c31; }
+    .cb.off:hover { background: rgba(239, 84, 105, .24); }
+    .cb.live:hover { background: var(--accent-soft); }
+    .cb.leave:hover { background: #dc3f56; }
+    .send:not(:disabled):hover { background: #e4e4e7; }
+    .m:hover { background: rgba(255, 255, 255, .035); }
+  }

@@ -1,0 +1,5 @@
+/* arquivo: css/mascot.css — Coelhinho do canto superior. */
+
+  #bunny { position: fixed; top: 3px; right: 14px; width: 62px; height: 62px; z-index: 5; pointer-events: none; }
+  #bunny svg { width: 100%; height: 100%; overflow: visible; }
+  #bunny .iris { transition: transform .09s ease-out; }

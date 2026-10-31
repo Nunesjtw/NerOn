@@ -37,9 +37,16 @@ const snapshot = () =>
   [...channels.values()].map((c) => ({
     id: c.id,
     name: c.name,
-    members: [...c.members].map(([id, name]) => ({ id, name })),
+    // muted: cada pessoa avisa quando muta; todos veem o ícone de microfone cortado
+    members: [...c.members].map(([id, name]) => ({ id, name, muted: !!io.sockets.sockets.get(id)?.data.muted })),
   }));
 const broadcast = () => io.emit('channels', snapshot());
+
+// quem está online (todos os conectados) e o status de atividade de cada um
+const STATUS_DEFAULT = 'Online';
+const usersSnapshot = () =>
+  [...io.sockets.sockets.values()].map((s) => ({ id: s.id, name: s.data.name, status: s.data.status || STATUS_DEFAULT }));
+const broadcastUsers = () => io.emit('users', usersSnapshot());
 
 io.use((socket, next) => {
   if (ACCESS_CODE && socket.handshake.auth.code !== ACCESS_CODE) {
@@ -50,15 +57,19 @@ io.use((socket, next) => {
 
 io.on('connection', (socket) => {
   socket.data.name = String(socket.handshake.auth.name || 'Anônimo').slice(0, 20);
+  socket.data.status = STATUS_DEFAULT;
   socket.emit('channels', snapshot());
+  broadcastUsers();
 
   const leave = () => {
     const ch = channels.get(socket.data.room);
     if (!ch) return;
+    socket.to(ch.id).emit('typing', { id: socket.id, name: socket.data.name, on: false });  // quem sai não fica "digitando"
     ch.members.delete(socket.id);
     socket.leave(ch.id);
     socket.to(ch.id).emit('peer:left', socket.id);
     socket.data.room = null;
+    socket.data.muted = false;
     broadcast();
   };
 
@@ -85,6 +96,22 @@ io.on('connection', (socket) => {
 
   socket.on('leave', leave);
 
+  // status de atividade: "Codando", "Jogando", "Focado" ou texto livre (até 24 letras)
+  socket.on('status', (s) => {
+    socket.data.status = String(s || '').trim().slice(0, 24) || STATUS_DEFAULT;
+    broadcastUsers();
+  });
+
+  // "fulano está digitando": só repassa para quem está na mesma call
+  socket.on('typing', (on) => {
+    if (socket.data.room) socket.to(socket.data.room).emit('typing', { id: socket.id, name: socket.data.name, on: !!on });
+  });
+
+  socket.on('muted', (m) => {
+    socket.data.muted = !!m;
+    if (socket.data.room) broadcast();
+  });
+
   socket.on('signal', ({ to, data }) => {
     io.to(to).emit('signal', { from: socket.id, data });
   });
@@ -104,6 +131,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', leave);
+  socket.on('disconnect', broadcastUsers);
 });
 
 const PORT = process.env.PORT || 3000;

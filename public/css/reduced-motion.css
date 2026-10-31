@@ -1,0 +1,10 @@
+/* arquivo: css/reduced-motion.css — Acessibilidade: desliga animações para quem pede "reduzir movimento". Sempre o último. */
+
+  @media (prefers-reduced-motion: reduce) {
+    .crt-lite, .dots i { animation: none !important; }
+    /* mantém as scanlines (estático), tira todo o movimento */
+    .crt-glitch, .crt-glitch::before, .crt-glitch::after { animation: none !important; }
+    .tile, .m.live { animation-name: fade; }
+    .icon-btn:active, .cb:active, .send:active { transform: none; }
+    #bunny .iris { transition: none; }
+  }
