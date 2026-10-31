@@ -179,6 +179,6 @@ A comunicação entre cliente e servidor acontece via Socket.IO.
 
 <div align="center">
 
-Feito com café, WebRTC e um coelhinho de óculos. 🐰
+Feito com Suco de uva, muita paciencia e um gato muito inteligente. 🐰
 
 </div>
