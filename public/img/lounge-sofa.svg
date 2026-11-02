@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="130 70 330 190" width="660" height="380">
+  <defs>
+    <radialGradient id="floorGlow" cx="292" cy="226" r="160" gradientTransform="translate(0 226) scale(1 .07) translate(0 -226)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e8893a" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#e8893a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sofaBack" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ea6a30"/><stop offset="1" stop-color="#cf531d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- luz do abajur e brilho no chão -->
+  <ellipse cx="292" cy="226" rx="160" ry="12" fill="url(#floorGlow)"/>
+  <ellipse cx="292" cy="224" rx="150" ry="6" fill="#000" opacity=".28"/>
+
+  <!-- abajur -->
+  <rect x="162.8" y="116" width="2.4" height="106" rx="1.2" fill="#5b3a1f"/>
+  <ellipse cx="164" cy="222.5" rx="14" ry="3.6" fill="#4a2f19"/>
+  <path d="M151 92h26l8 25h-42z" fill="#f2b632"/>
+  <ellipse cx="164" cy="92" rx="13" ry="3" fill="#ffd45e"/>
+  <path d="M143 117h42" stroke="#d99a1f" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- sofá: encosto -->
+  <rect x="188" y="122" width="204" height="82" rx="26" fill="url(#sofaBack)"/>
+  <path d="M290 128v66" stroke="#b8461a" stroke-width="2.2" stroke-linecap="round" opacity=".7"/>
+  <rect x="196" y="126" width="188" height="5" rx="2.5" fill="#fff" opacity=".12"/>
+  <!-- sofá: base e almofadas do assento -->
+  <rect x="176" y="190" width="228" height="30" rx="11" fill="#d9561f"/>
+  <rect x="176" y="190" width="228" height="5" rx="2.5" fill="#fff" opacity=".10"/>
+  <rect x="222" y="172" width="66" height="30" rx="9" fill="#f07a40"/>
+  <rect x="292" y="172" width="66" height="30" rx="9" fill="#f07a40"/>
+  <path d="M232 178h46M302 178h46" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".14"/>
+  <!-- braços -->
+  <rect x="172" y="140" width="48" height="80" rx="22" fill="#ee7036"/>
+  <rect x="360" y="140" width="48" height="80" rx="22" fill="#ee7036"/>
+  <rect x="180" y="146" width="16" height="5" rx="2.5" fill="#fff" opacity=".18"/>
+  <rect x="384" y="146" width="16" height="5" rx="2.5" fill="#fff" opacity=".18"/>
+  <path d="M176 212h40M364 212h40" stroke="#b8461a" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+  <!-- pés -->
+  <rect x="190" y="219" width="12" height="5" rx="2" fill="#4a2f19"/>
+  <rect x="378" y="219" width="12" height="5" rx="2" fill="#4a2f19"/>
+
+  <!-- mesinha + pipoca + controle -->
+  <rect x="408" y="183" width="34" height="40" rx="3" fill="#8a5430"/>
+  <rect x="405" y="180" width="40" height="6" rx="2.5" fill="#a96b3e"/>
+  <path d="M414 164h14l-2 16h-10z" fill="#fff"/>
+  <path d="M417 164l1.4 16M421 164v16M425 164l-1.4 16" stroke="#e0362d" stroke-width="2.2"/>
+  <path d="M414 164h14" stroke="#e0362d" stroke-width="1.6"/>
+  <circle cx="416" cy="162.5" r="3.2" fill="#fff2c2"/><circle cx="421" cy="160.5" r="3.4" fill="#ffe9a0"/>
+  <circle cx="426" cy="162.5" r="3.2" fill="#fff2c2"/><circle cx="418.5" cy="158.5" r="2.8" fill="#ffe9a0"/>
+  <circle cx="423.5" cy="158.8" r="2.8" fill="#fff2c2"/>
+  <rect x="433" y="171" width="5" height="9" rx="1.5" fill="#1d1d20" transform="rotate(14 435 175)"/>
+</svg>

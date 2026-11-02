@@ -8,6 +8,7 @@
     .icon-btn:active, .cb:active, .send:active { transform: none; }
     #bunny .iris { transition: none; }
     .dd-menu, .dd-menu li, .me, .me-chev, .dd-chev { transition: none !important; }
+    #audio-lounge-mode, .lounge-seat { animation: none !important; }
     #emoji-pop, #attach-preview, #lightbox, #lightbox img, #toast { animation: none !important; }
     .m .mimg, .emoji-grid button, .tool { transition: none !important; }
     .m .mimg:hover, .emoji-grid button:hover { transform: none !important; }

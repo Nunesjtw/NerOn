@@ -97,7 +97,8 @@ function ui() {
   $('#txt').placeholder = cur ? 'Enviar mensagem' : 'Entre em um canal para conversar';
 
   const hasTile = $('#stage .tile:not([hidden])');
-  $('#empty').hidden = !!hasTile;
+  const lounge = typeof updateLounge === 'function' && updateLounge();   // 'Modo Sofá' (call.js)
+  $('#empty').hidden = !!hasTile || lounge;
   $('#et').textContent = cur ? 'Você está na call' : 'Nenhum canal selecionado';
   $('#ed').textContent = cur ? 'Quando alguém compartilhar a tela, ela aparece aqui. Para transmitir a sua, use o botão Compartilhar tela.' : 'Escolha um canal de voz na lista à esquerda para começar a conversar.';
   flow.setActive(!cur);

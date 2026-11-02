@@ -51,6 +51,7 @@ O front-end é escrito em **JavaScript puro (sem frameworks e sem etapa de build
 
 ### Experiência
 - Fundo animado em canvas (fluxo de dados convergindo para um nó) quando nenhum canal está selecionado.
+- **Modo Sofá** (easter egg): em chamadas de exatamente 2 pessoas e só de áudio, os avatares sentam num sofá cartoon (SVG) com abajur e pipoca, com a tag "você" e a dica para compartilhar a tela; o sofá some assim que alguém compartilha a tela ou entra um terceiro participante.
 - Títulos de canal com efeito **CRT + glitch**.
 - Mascote que acompanha o mouse com o olhar.
 - Layout **responsivo**: no celular, a interface vira três abas (Canais, Chamada e Chat).
@@ -115,11 +116,12 @@ Por padrão o Nero usa o STUN público do Google, o que funciona na maioria das 
 ├── package.json
 └── public/
     ├── index.html
+    ├── img/                # lounge-sofa.svg (cenário do Modo Sofá)
     ├── sounds/             # join.wav, leave.wav
     ├── css/                # um arquivo por assunto (base, sidebar, chat, call, dropdown…)
     └── js/                 # um arquivo por assunto
         ├── connection.js   # nome, código de acesso e socket
-        ├── call.js         # entrar e sair de canais
+        ├── call.js         # entrar e sair de canais + Modo Sofá
         ├── webrtc.js       # pares, sinalização e faixas recebidas
         ├── screen-share.js # compartilhamento de tela e qualidade
         ├── chat.js         # mensagens, imagens, emojis e envio
@@ -179,6 +181,6 @@ A comunicação entre cliente e servidor acontece via Socket.IO.
 
 <div align="center">
 
-Feito com Suco de uva, muita paciencia e um gato muito inteligente. 🐰
+Feito com café, WebRTC e um coelhinho de óculos. 🐰
 
 </div>
